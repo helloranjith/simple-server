@@ -1,0 +1,9 @@
+<% content_for :title do %>
+  <%= @region.name %> | Liver
+<% end %>
+
+<%= render "header" %>
+
+<% args = { data: @data, region: @region, period: @period } %>
+<% args_with_ltfu = { data: @data, region: @region, period: @period, with_ltfu: @with_ltfu } %>
+

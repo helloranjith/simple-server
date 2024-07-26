@@ -13,7 +13,7 @@ class Reports::RegionsController < AdminController
   delegate :cache, to: Rails
 
   INDEX_CACHE_KEY = "v3"
-
+ 
   def index
     if current_admin.feature_enabled?(:regions_fast_index)
       fastindex
@@ -206,6 +206,56 @@ class Reports::RegionsController < AdminController
       )
     end
   end
+
+  def liver
+    start_period = @period.advance(months: -(Reports::MAX_MONTHS_OF_DATA - 1))
+    range = Range.new(start_period, @period)
+    @repository = Reports::Repository.new(@region, periods: range)
+    @presenter = Reports::RepositoryPresenter.new(@repository)
+    @data = @presenter.call(@region)
+    @with_ltfu = with_ltfu?
+    @latest_period = Period.current
+
+    authorize { current_admin.accessible_facilities(:view_reports).any? }
+
+    @child_regions = @region.reportable_children.filter { |region| region.diabetes_management_enabled? }
+    repo = Reports::Repository.new(@child_regions, periods: @period)
+
+    @children_data = @child_regions.map { |region|
+      slug = region.slug
+      {
+        region: region,
+        diabetes_patients_with_bs_taken: repo.diabetes_patients_with_bs_taken[slug],
+        diabetes_patients_with_bs_taken_breakdown_rates: repo.diabetes_patients_with_bs_taken_breakdown_rates[slug],
+        diabetes_patients_with_bs_taken_breakdown_counts: repo.diabetes_patients_with_bs_taken_breakdown_counts[slug]
+      }
+    }
+
+    regions = if @region.facility_region?
+      [@region]
+    else
+      [@region, @region.reportable_children].flatten
+    end
+
+    months = -(Reports::MAX_MONTHS_OF_DATA - 1)
+    @details_period_range = Range.new(@period.advance(months: -5), @period)
+    @details_repository = Reports::Repository.new(regions, periods: @details_period_range)
+    chart_range = (@period.advance(months: months)..@period)
+    chart_repo = Reports::Repository.new(@region, periods: chart_range)
+    @details_chart_data = {
+      ltfu_trend: diabetes_ltfu_chart_data(chart_repo, chart_range),
+      **medications_dispensation_data(region: @region, period: @period, diagnosis: :diabetes)
+    }
+
+    @data.merge!(@details_chart_data)
+
+    if @region.facility_region?
+      @recent_blood_sugars = paginate(
+        @region.source.blood_sugars.for_recent_measures_log.includes(:patient, :facility)
+      )
+    end
+  end
+
 
   def download
     authorize { current_admin.accessible_facilities(:view_reports).any? }

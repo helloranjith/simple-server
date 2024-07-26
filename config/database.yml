@@ -2,10 +2,14 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV['SIMPLE_SERVER_DATABASE_HOST'] %>
-  username: <%= ENV['SIMPLE_SERVER_DATABASE_USERNAME'] %>
-  password: <%= ENV['SIMPLE_SERVER_DATABASE_PASSWORD'] %>
-  database: <%= ENV['SIMPLE_SERVER_DATABASE_NAME'] %>
+  # host: <%= ENV['SIMPLE_SERVER_DATABASE_HOST'] %>
+  # username: <%= ENV['SIMPLE_SERVER_DATABASE_USERNAME'] %>
+  # password: <%= ENV['SIMPLE_SERVER_DATABASE_PASSWORD'] %>
+  # database: <%= ENV['SIMPLE_SERVER_DATABASE_NAME'] %>
+  host: "127.0.0.1"
+  username: "postgres"
+  password: "Test1234"
+  database: "simple_clf"
 
 development:
   <<: *default

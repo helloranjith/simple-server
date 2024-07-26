@@ -146,16 +146,16 @@
       "value": "4"
     },
     "SIMPLE_SERVER_DATABASE_HOST": {
-      "value": "invalid"
+      "value": "127.0.0.1"
     },
     "SIMPLE_SERVER_DATABASE_NAME": {
-      "value": "invalid"
+      "value": "simple_clf"
     },
     "SIMPLE_SERVER_DATABASE_PASSWORD": {
-      "value": "invalid"
+      "value": "Test123"
     },
     "SIMPLE_SERVER_DATABASE_USERNAME": {
-      "value": "invalid"
+      "value": "postgres"
     },
     "SIMPLE_SERVER_ENV": {
       "value": "review"

@@ -44,6 +44,7 @@ class Patient < ApplicationRecord
   has_many :passport_authentications, through: :business_identifiers
 
   has_many :blood_pressures, inverse_of: :patient
+  has_many :liver_values, inverse_of: :patient
   has_many :blood_sugars
   has_many :prescription_drugs
   has_many :facilities, -> { distinct }, through: :blood_pressures
