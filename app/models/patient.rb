@@ -44,10 +44,13 @@ class Patient < ApplicationRecord
   has_many :passport_authentications, through: :business_identifiers
 
   has_many :blood_pressures, inverse_of: :patient
+  has_many :liver_values, inverse_of: :patient
   has_many :blood_sugars
   has_many :prescription_drugs
   has_many :facilities, -> { distinct }, through: :blood_pressures
   has_many :users, -> { distinct }, through: :blood_pressures
+  has_many :facilities, -> { distinct }, through: :liver_values
+  has_many :users, -> { distinct }, through: :liver_values
   has_many :appointments
   has_many :notifications
   has_many :treatment_group_memberships, class_name: "Experimentation::TreatmentGroupMembership"

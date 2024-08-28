@@ -27,6 +27,14 @@ Rails.application.routes.draw do
       post "sync", to: "blood_pressures#sync_from_user"
     end
 
+    scope "/liver_values" do
+      get "sync", to: "liver_values#sync_to_user"
+      post "insert_liver", to: "liver_values#sync_from_user"
+      post "sync", to: "liver_values#insert_liver"
+      
+    end
+
+
     scope "/blood_sugars" do
       get "sync", to: "blood_sugars#sync_to_user"
       post "sync", to: "blood_sugars#sync_from_user"
@@ -219,6 +227,15 @@ Rails.application.routes.draw do
       to: "regions#diabetes_monthly_district_report", as: :region_diabetes_monthly_district_report
     get "regions/:report_scope/:id/diabetes/monthly_district_data_report",
       to: "regions#diabetes_monthly_district_data", as: :region_diabetes_monthly_district_data
+
+    get "regions/:report_scope/:id/liver", to: "regions#liver", as: :region_liver
+    # get "regions/:report_scope/:id/liver/monthly_state_data_report",
+    #   to: "regions#liver_monthly_state_data", as: :region_liver_monthly_state_data
+    # get "regions/:report_scope/:id/liver/monthly_district_report",
+    #   to: "regions#liver_monthly_district_report", as: :region_liver_monthly_district_report
+    # get "regions/:report_scope/:id/liver/monthly_district_data_report",
+    #   to: "regions#liver_monthly_district_data", as: :region_liver_monthly_district_data
+
   end
 
   resource :regions_search, controller: "regions_search"

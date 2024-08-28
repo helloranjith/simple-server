@@ -9,6 +9,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
+require "faker"
 
 require_relative "../lib/extensions/logging_extensions"
 require_relative "../lib/env_helper"
@@ -26,6 +27,7 @@ module SimpleServer
       # Colors don't work right in console with our logging, so turn them off
       config.colorize_logging = false
     end
+    config.active_record.belongs_to_required_by_default = false
 
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1

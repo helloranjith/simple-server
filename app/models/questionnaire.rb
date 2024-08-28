@@ -73,7 +73,8 @@ class Questionnaire < ApplicationRecord
     return sub_layout unless text
     return sub_layout if text.empty?
 
-    sub_layout.merge({"text" => I18n.t!(text)})
+    # sub_layout.merge({"text" => I18n.t!(text)})
+    sub_layout.merge({"text" => text})
   end
 
   def generate_layout_id(sub_layout)

@@ -125,6 +125,37 @@ class Api::V3::Models
        required: %w[systolic diastolic created_at updated_at patient_id facility_id user_id]}
     end
 
+    def liver_value
+      {type: :object,
+       properties: {
+         id: {"$ref" => "#/definitions/uuid"},
+         ldh: {type: :float},
+         tot_bilirubin: {type: :float},
+         dir_bilirubin: {type: :float},
+         indir_bilirubin: {type: :float},
+         tot_cholesterol: {type: :float},
+         triglycerides: {type: :float},
+         hdl: {type: :float},
+         ldl: {type: :float},
+         vldl: {type: :float},
+         hdl_radio: {type: :float},
+         height: {type: :float},
+         weight: {type: :float},
+         platelet_count: {type: :integer},
+         hb: {type: :float},
+         apri_score: {type: :float},
+         ast: {type: :float},
+         deleted_at: {"$ref" => "#/definitions/nullable_timestamp"},
+         created_at: {"$ref" => "#/definitions/timestamp"},
+         updated_at: {"$ref" => "#/definitions/timestamp"},
+         recorded_at: {"$ref" => "#/definitions/timestamp"},
+         patient_id: {"$ref" => "#/definitions/uuid"},
+         facility_id: {"$ref" => "#/definitions/uuid"},
+         user_id: {"$ref" => "#/definitions/uuid"}
+       },
+       required: %w[id ldh tot_bilirubin dir_bilirubin indir_bilirubin tot_cholesterol triglycerides hdl ldl vldl hdl_radio height weight platelet_count hb apri_score ast created_at updated_at patient_id facility_id user_id]}
+    end
+
     def blood_sugar
       {type: :object,
        properties: {
@@ -360,7 +391,9 @@ class Api::V3::Models
        patient_business_identifier: patient_business_identifier,
        patient_business_identifiers: Api::CommonDefinitions.array_of("patient_business_identifier"),
        blood_sugar: blood_sugar,
-       blood_sugars: Api::CommonDefinitions.array_of("blood_sugar")}
+       blood_sugars: Api::CommonDefinitions.array_of("blood_sugar"),
+       liver_value: liver_value,
+       liver_values: Api::CommonDefinitions.array_of("liver_value")}
     end
   end
 end

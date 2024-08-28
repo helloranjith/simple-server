@@ -8,6 +8,7 @@ module SidekiqConfig
   DEFAULT_REDIS_POOL_SIZE = 12
 
   Sidekiq::Extensions.enable_delay!
+  # Sidekiq::Extensions.delegate!
 
   def self.connection_pool
     ConnectionPool.new(size: EnvHelper.get_int("SIDEKIQ_REDIS_POOL_SIZE", DEFAULT_REDIS_POOL_SIZE)) do

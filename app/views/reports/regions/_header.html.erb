@@ -40,6 +40,13 @@
         <% if @region.facility_region? && current_admin.feature_enabled?(:dashboard_progress_reports) %>
             <%= link_to "Progress", reports_progress_path(@region), :class => "nav-link" %>
         <% end %>
+        <% if @region.diabetes_management_enabled? %>
+          <%= link_to "Liver Values", reports_region_liver_path, class: "nav-link #{active_action?("liver")}" %>
+        <% end %>
+        <% if @region.facility_region? && current_admin.feature_enabled?(:dashboard_progress_reports) %>
+            <%= link_to "Progress", reports_progress_path(@region), :class => "nav-link" %>
+        <% end %>
+
       </nav>
     </div>
     <div class="d-flex actions order-1 mb-16px order-lg-2 mb-lg-0">

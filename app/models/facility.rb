@@ -23,6 +23,7 @@ class Facility < ApplicationRecord
     join_table: "facilities_teleconsultation_medical_officers"
 
   has_many :encounters
+  has_many :liver_values, through: :encounters, source: :liver_values
   has_many :blood_pressures, through: :encounters, source: :blood_pressures
   has_many :blood_sugars, through: :encounters, source: :blood_sugars
   has_many :patients, -> { distinct }, through: :encounters
@@ -240,6 +241,7 @@ class Facility < ApplicationRecord
     {
       "assigned_patients" => assigned_patients,
       "registered patient" => registered_patients,
+      "liver value" => liver_values,
       "blood pressure" => blood_pressures,
       "blood sugar" => blood_sugars,
       "scheduled appointment" => appointments.status_scheduled,

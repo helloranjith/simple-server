@@ -6,6 +6,7 @@ class Encounter < ApplicationRecord
   belongs_to :facility
 
   has_many :observations
+  has_many :liver_values, through: :observations, source: :observable, source_type: "LiverValue"
   has_many :blood_pressures, through: :observations, source: :observable, source_type: "BloodPressure"
   has_many :blood_sugars, through: :observations, source: :observable, source_type: "BloodSugar"
 

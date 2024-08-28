@@ -58,6 +58,10 @@ class Api::V3::Schema
     def blood_pressure_sync_from_user_request
       sync_from_user_request(:blood_pressures)
     end
+    
+    def liver_value_sync_from_user_request
+      sync_from_user_request(:liver_values)
+    end
 
     def blood_sugar_sync_from_user_request
       sync_from_user_request(:blood_sugars)
@@ -89,6 +93,10 @@ class Api::V3::Schema
 
     def blood_pressure_sync_to_user_response
       sync_to_user_response(:blood_pressures)
+    end
+
+    def liver_value_sync_to_user_response
+      sync_to_user_response(:liver_values)
     end
 
     def blood_sugar_sync_to_user_response

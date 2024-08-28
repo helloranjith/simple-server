@@ -11,6 +11,7 @@ class FacilityGroup < ApplicationRecord
   has_many :patients, through: :facilities, source: :registered_patients
   has_many :assigned_patients, through: :facilities, source: :assigned_patients
   has_many :blood_pressures, through: :facilities
+  has_many :liver_values, through: :facilities
   has_many :blood_sugars, through: :facilities
   has_many :encounters, through: :facilities
   has_many :prescription_drugs, through: :facilities
@@ -97,7 +98,7 @@ class FacilityGroup < ApplicationRecord
   end
 
   def discardable?
-    facilities.none? && patients.none? && blood_pressures.none? && blood_sugars.none? && appointments.none?
+    facilities.none? && patients.none? && blood_pressures.none? && liver_values.none? && blood_sugars.none? && appointments.none?
   end
 
   def dashboard_analytics(period:, prev_periods:, include_current_period: true)
