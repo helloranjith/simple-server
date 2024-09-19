@@ -5,7 +5,7 @@ class LiverValue < ApplicationRecord
   extend SQLHelpers
 
   ANONYMIZED_DATA_FIELDS = %w[id patient_id created_at bp_date registration_facility_name user_id
-    lv_ldh iv_tot_bilirubin iv_dir_bilirubin iv_indir_bilirubin iv_tot_cholesterol iv_triglycerides iv_hdl iv_ldl iv_vldl iv_hdl_radio iv_height iv_weight iv_platelet_count iv_hb iv_ast iv_apri_score]
+    lv_ldh iv_tot_bilirubin iv_dir_bilirubin iv_indir_bilirubin iv_tot_cholesterol iv_triglycerides iv_hdl iv_ldl iv_vldl iv_hdl_radio iv_height iv_weight iv_platelet_count iv_hb iv_heb_c iv_heb_b iv_heb_b_status iv_heb_b_date iv_bmi iv_uric_acid iv_creatinine iv_urine_protine iv_fatty_liver iv_fatty_liver_grade iv_ast iv_apri_score]
 
   # THRESHOLDS = {
   #   critical: {systolic: 180, diastolic: 110},
@@ -82,6 +82,16 @@ class LiverValue < ApplicationRecord
      iv_weight: weight,
      iv_platelet_count: platelet_count,
      iv_hb: hb,
+     iv_heb_c: heb_c,
+     iv_heb_b: heb_b,
+     iv_heb_b_status: heb_b_status,
+     iv_heb_b_date: heb_b_date,
+     iv_bmi: bmi,
+     iv_uric_acid: uric_acid,
+     iv_creatinine: creatinine,
+     iv_urine_protine: urine_protine,
+     iv_fatty_liver: fatty_liver,
+     iv_fatty_liver_grade: fatty_liver_grad,
      iv_ast: ast,
      iv_apri_score: apri_score}
   end

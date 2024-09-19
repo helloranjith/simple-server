@@ -191,6 +191,16 @@ RSpec.describe LiverValue, type: :model do
            iv_platelet_count: liver_value.platelet_count,
            iv_hb: liver_value.hb,
            iv_ast: liver_value.ast,
+           iv_heb_c: liver_value.heb_c,
+           iv_heb_b: liver_value.heb_b,
+           iv_heb_b_status: liver_value.heb_b_status,
+           iv_heb_b_date: liver_value.heb_b_date,
+           iv_bmi: liver_value.bmi,
+           iv_uric_acid: liver_value.uric_acid,
+           iv_creatinine: liver_value.creatinine,
+           iv_urine_protine: liver_value.urine_protine,
+           iv_fatty_liver: liver_value.fatty_liver,
+           iv_fatty_liver_grade: liver_value.fatty_liver_grad,
            iv_apri_score: liver_value.apri_score}
 
         expect(liver_value.anonymized_data).to eq anonymised_data
